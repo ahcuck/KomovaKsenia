@@ -1,14 +1,14 @@
 #include <iostream>
 
-void D(int** arr, int x){
-    for (int i=0;i<x;i++){
+void D(int** arr, size_t x){
+    for (unsigned int i=0;i<x;i++){
         delete[] arr[i];
     }
     delete[] arr;
 }
-void V(int** arr, int a, int b){
-    for (int i = 0;i<b;i++){
-        for (int j = 0;j<a;j++){
+void V(int** arr, size_t a, size_t b){
+    for (unsigned int i = 0;i<b;i++){
+        for (unsigned int j = 0;j<a;j++){
             std::cout<<arr[i][j]<<" ";
         }
     std::cout<<std::endl;
@@ -17,14 +17,16 @@ void V(int** arr, int a, int b){
 }
 int main()
 {
-    int a = 0; int b = 0;
-    std::cin>>a;
-    std::cin>>b;
-    if (a<=0 or b<=0){
+    int a1 = 0; int b1 = 0;
+    std::cin>>a1;
+    std::cin>>b1;
+    if (std::cin.fail() or a1<=0 or b1<=0){
         return 1;
     }
+    size_t a = a1;
+    size_t b = b1;
     int** arr = nullptr;
-    int fill = 0;
+    size_t fill = 0;
     try{
         arr = new int*[b];
         for (;fill<b;fill++){
@@ -35,9 +37,10 @@ int main()
         D(arr,fill);
         return 2;
     }
-    for (int i = 0;i<a;i++){
-        for (int j = 0;j<b;j++){
-            if (!(std::cin>>arr[j][i])){
+    for (unsigned int i = 0;i<a;i++){
+        for (unsigned int j = 0;j<b;j++){
+            std::cin>>arr[j][i];
+            if (std::cin.fail()){
                 D(arr,b);
                 return 1;
             };
