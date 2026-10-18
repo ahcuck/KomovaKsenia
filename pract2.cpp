@@ -71,16 +71,6 @@ void D(int** arr, size_t x){
     delete[] arr;
 }
 
-void V(int** arr, size_t a, size_t b, size_t a1, size_t b1){
-    for (size_t i = 0;i<a;i++){
-        for (size_t j = 0;j<b;j++){
-            std::cout<<arr[i][j]<<" ";
-        }
-    std::cout<<std::endl;
-    }
-    D(arr,b);
-}
-
  int main()
  {
     long long n01 = 0; long long m01 = 0; long long n02 = 0; long long m02 = 0;
@@ -117,10 +107,16 @@ void V(int** arr, size_t a, size_t b, size_t a1, size_t b1){
             }
         }
         if (std::cin.fail()){
+                D(lhs,n1);
+                D(rhs,n2);
             return 1;
         }
         result =concat_rows(lhs,n1,m1,rhs,n2,m2);
     }catch(std::bad_alloc){
+        D(lhs,fill1);
+        D(rhs,fill2);
+        return 2;
+    }catch(std::overflow_error){
         D(lhs,fill1);
         D(rhs,fill2);
         return 2;
